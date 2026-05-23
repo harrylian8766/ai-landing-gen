@@ -1,0 +1,42 @@
+{
+  "name": "ai-landing-gen",
+  "version": "0.1.0",
+  "description": "One YAML → One Perfect AI Landing Page. Generate beautiful, compliant landing pages for AI applications.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "ai-landing-gen": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "templates",
+    "schemas"
+  ],
+  "scripts": {
+    "build": "tsc && cp -r templates dist/ && cp -r schemas dist/",
+    "dev": "tsc --watch",
+    "test": "node --test dist/tests/**/*.test.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "ai",
+    "landing-page",
+    "generator",
+    "static-site",
+    "yaml",
+    "open-source"
+  ],
+  "author": "AI Pair",
+  "license": "MIT",
+  "dependencies": {
+    "yaml": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

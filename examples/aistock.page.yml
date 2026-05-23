@@ -1,0 +1,54 @@
+name: AI Stock
+description: AI-powered stock analysis tool with real-time quotes and smart stock picking
+domain: aistock.hk
+
+template: tool
+style:
+  gradient: "135deg, #f093fb, #f5576c"
+  icon: 📈
+
+features:
+  - icon: 📊
+    title: Real-time Quotes
+    description: View live stock prices and trends
+  - icon: 🤖
+    title: AI Analysis
+    description: Smart stock picking with AI algorithms
+  - icon: 💰
+    title: Fund Flow
+    description: Track main fund movements
+
+i18n:
+  zh:
+    headline: "AI Stock"
+    subtitle: "免费实时行情 + 智能选股"
+    cta: "立即体验"
+    feature_0_title: "实时行情"
+    feature_0_desc: "查看股票实时价格和趋势"
+    feature_1_title: "AI 分析"
+    feature_1_desc: "智能选股策略与技术指标"
+    feature_2_title: "资金流向"
+    feature_2_desc: "追踪主力资金动向"
+  'zh-Hant':
+    headline: "AI Stock"
+    subtitle: "免費實時行情 + 智能選股"
+    cta: "立即體驗"
+    feature_0_title: "實時行情"
+    feature_0_desc: "查看股票實時價格和趨勢"
+    feature_1_title: "AI 分析"
+    feature_1_desc: "智能選股策略與技術指標"
+    feature_2_title: "資金流向"
+    feature_2_desc: "追蹤主力資金動向"
+  en:
+    headline: "AI Stock"
+    subtitle: "Free real-time quotes + AI stock picking"
+    cta: "Try Now"
+    feature_0_title: "Real-time Quotes"
+    feature_0_desc: "View live stock prices and trends"
+    feature_1_title: "AI Analysis"
+    feature_1_desc: "Smart stock picking with AI"
+    feature_2_title: "Fund Flow"
+    feature_2_desc: "Track main fund movements"
+
+seo:
+  keywords: [AI股票, 股票分析, 选股工具, 实时行情, stock analysis]

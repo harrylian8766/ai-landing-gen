@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AI Landing Page Config",
+  "type": "object",
+  "required": ["name", "template", "i18n"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Page name (brand name)"
+    },
+    "description": {
+      "type": "string",
+      "description": "Short description for SEO"
+    },
+    "domain": {
+      "type": "string",
+      "description": "Domain name (e.g. aistock.hk)"
+    },
+    "template": {
+      "type": "string",
+      "enum": ["tool", "game", "social", "info", "card", "saas"],
+      "description": "Template type"
+    },
+    "style": {
+      "type": "object",
+      "properties": {
+        "gradient": {
+          "type": "string",
+          "description": "CSS gradient (e.g. '135deg, #667eea, #764ba2')"
+        },
+        "icon": {
+          "type": "string",
+          "description": "Emoji icon"
+        }
+      }
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["icon", "title", "description"],
+        "properties": {
+          "icon": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "i18n": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-zA-Z-]+$": {
+          "type": "object",
+          "required": ["headline", "subtitle", "cta"],
+          "properties": {
+            "headline": { "type": "string" },
+            "subtitle": { "type": "string" },
+            "cta": { "type": "string" }
+          }
+        }
+      }
+    },
+    "seo": {
+      "type": "object",
+      "properties": {
+        "keywords": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "ogImage": {
+          "type": "string",
+          "description": "OG image URL"
+        }
+      }
+    }
+  }
+}

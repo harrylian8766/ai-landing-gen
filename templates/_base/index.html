@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="{{DEFAULT_LANG}}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{NAME}} — AI Application</title>
+  <meta name="description" content="{{DESCRIPTION}}">
+  <meta property="og:title" content="{{NAME}} — AI Application">
+  <meta property="og:description" content="{{DESCRIPTION}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://{{DOMAIN}}">
+  <meta property="og:image" content="https://aipair.ai/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@aipair_ai">
+  <link rel="canonical" href="https://{{DOMAIN}}">
+  <style>
+    :root {
+      --bg-primary: #0f0f23;
+      --bg-card: #1a1a2e;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0c0;
+      --text-muted: #607090;
+      --accent-primary: #667eea;
+      --accent-secondary: #764ba2;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+    
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient({{GRADIENT}});
+      background-attachment: fixed;
+    }
+    
+    .logo {
+      font-size: 64px;
+      margin-bottom: 24px;
+    }
+    
+    h1 {
+      font-size: 56px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    
+    .lang-switch {
+      margin-bottom: 20px;
+    }
+    
+    .lang-switch button {
+      padding: 6px 16px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 20px;
+      color: #fff;
+      cursor: pointer;
+      margin: 0 4px;
+      transition: all 0.2s;
+    }
+    
+    .lang-switch button.active {
+      background: rgba(255,255,255,.25);
+      border-color: rgba(255,255,255,.4);
+    }
+    
+    .subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 650px;
+      margin-bottom: 48px;
+    }
+    
+    .cta {
+      padding: 16px 48px;
+      font-size: 18px;
+      font-weight: 600;
+      background: rgba(255,255,255,.15);
+      border: 2px solid rgba(255,255,255,.3);
+      border-radius: 50px;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+    
+    .cta:hover {
+      background: rgba(255,255,255,.25);
+      transform: translateY(-2px);
+    }
+    
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 900px;
+      width: 100%;
+      padding: 0 16px;
+      margin-top: 64px;
+    }
+    
+    .feature {
+      background: var(--bg-card);
+      padding: 32px;
+      border-radius: 16px;
+      text-align: left;
+    }
+    
+    .feature-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+    
+    .feature h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .feature p {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+    
+    @media (max-width: 640px) {
+      .hero {
+        padding: 60px 16px 40px;
+        min-height: auto;
+      }
+      h1 { font-size: 36px; }
+      .logo { font-size: 36px; }
+      .subtitle { font-size: 16px; margin-bottom: 32px; }
+      .cta { padding: 14px 32px; font-size: 16px; }
+      .features {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 0 12px;
+      }
+      .feature { padding: 20px; }
+      .lang-switch button { padding: 5px 12px; font-size: 13px; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "{{NAME}}",
+    "url": "https://{{DOMAIN}}",
+    "description": "{{DESCRIPTION}}",
+    "applicationCategory": "WebApplication",
+    "operatingSystem": "Any"
+  }
+  </script>
+</head>
+<body>
+  <div class="hero">
+    <div class="logo">{{ICON}}</div>
+    <h1>{{NAME}}</h1>
+    <div class="lang-switch">
+      <button id="btn-zh" class="active" onclick="setLang('zh')">简</button>
+      <button id="btn-zht" onclick="setLang('zh-Hant')">繁</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <p class="subtitle" data-i18n="subtitle">{{SUBTITLE}}</p>
+    <a href="https://aipair.ai" class="cta" data-i18n="cta">{{CTA}}</a>
+    
+    <div class="features">
+      {{FEATURES}}
+    </div>
+  </div>
+  
+  <script>
+    {{I18N_SCRIPT}}
+  </script>
+  
+  {{FOOTER}}
+</body>
+</html>
