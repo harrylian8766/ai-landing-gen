@@ -18,6 +18,7 @@ Commands:
   init [name]              Initialize a new landing page project
   build [file]             Generate landing page from YAML
   validate [file]          Validate YAML configuration
+  scan [file|dir]          Security scan for API keys and secrets
   preview [dir]            Start local preview server
 
 Options:
@@ -84,6 +85,14 @@ async function main() {
     case "preview": {
       const dir = fileArg || outputDir;
       await cmdPreview(dir);
+      break;
+    }
+    case "scan": {
+      if (!fileArg) {
+        console.error("Error: Missing file or directory. Usage: ai-landing-gen scan <file.html|dir>");
+        process.exit(1);
+      }
+      await cmdScan(fileArg);
       break;
     }
     default:
@@ -192,6 +201,75 @@ async function cmdPreview(dir: string) {
   });
   
   server.listen(3000);
+}
+
+async function cmdScan(target: string) {
+  const { SecurityScanner } = await import("./core/security-scanner.js");
+  const { statSync, readFileSync, readdirSync } = await import("node:fs");
+  const { resolve, join, extname } = await import("node:path");
+  
+  const targetPath = resolve(target);
+  const stats = statSync(targetPath);
+  
+  const scanner = new SecurityScanner();
+  let totalVulns = 0;
+  let totalFiles = 0;
+  
+  if (stats.isFile()) {
+    // Scan single file
+    const content = readFileSync(targetPath, "utf-8");
+    const result = scanner.scan(content);
+    scanner.printReport(result);
+    totalVulns = result.vulnerabilities.length;
+    totalFiles = 1;
+  } else if (stats.isDirectory()) {
+    // Scan directory recursively
+    console.log(`\n🔒 Scanning directory: ${targetPath}\n`);
+    
+    const scanFile = (filePath: string) => {
+      const content = readFileSync(filePath, "utf-8");
+      const result = scanner.scan(content);
+      totalFiles++;
+      
+      if (!result.clean) {
+        totalVulns += result.vulnerabilities.length;
+        console.log(`  ⚠️  ${filePath.replace(targetPath + "/", "")}`);
+        for (const v of result.vulnerabilities.slice(0, 3)) {
+          console.log(`     Line ${v.line}: ${v.type}`);
+        }
+        if (result.vulnerabilities.length > 3) {
+          console.log(`     ... and ${result.vulnerabilities.length - 3} more`);
+        }
+      } else {
+        console.log(`  ✅ ${filePath.replace(targetPath + "/", "")}`);
+      }
+    };
+    
+    const scanDir = (dir: string) => {
+      const entries = readdirSync(dir, { withFileTypes: true });
+      for (const entry of entries) {
+        const fullPath = join(dir, entry.name);
+        if (entry.isDirectory()) {
+          scanDir(fullPath);
+        } else if (entry.isFile() && (extname(entry.name) === ".html" || extname(entry.name) === ".js")) {
+          scanFile(fullPath);
+        }
+      }
+    };
+    
+    scanDir(targetPath);
+    
+    console.log(`\n  ──────────────────────────────`);
+    console.log(`  Scanned: ${totalFiles} files`);
+    console.log(`  Issues: ${totalVulns} potential secrets`);
+    if (totalVulns === 0) {
+      console.log(`  Status: ✅ ALL CLEAN\n`);
+    } else {
+      console.log(`  Status: ❌ SECRETS FOUND\n`);
+    }
+  }
+  
+  process.exit(totalVulns > 0 ? 1 : 0);
 }
 
 main().catch((err) => {

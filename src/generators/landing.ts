@@ -3,6 +3,7 @@ import { join, resolve } from "node:path";
 import { parseYAML, validateConfig } from "../core/parser.js";
 import { renderTemplate, generateI18nScript } from "../core/renderer.js";
 import { loadTemplate } from "../core/types.js";
+import { SecurityScanner, SecurityScanResult } from "../core/security-scanner.js";
 
 export function generateLanding(yamlPath: string, outputDir: string): void {
   const content = readFileSync(resolve(yamlPath), "utf-8");
@@ -77,12 +78,31 @@ export function generateLanding(yamlPath: string, outputDir: string): void {
     .replace(/\{\{I18N_SCRIPT\}\}/g, i18nScript.replace("const I18N =", `const I18N = ${JSON.stringify(mergedI18n, null, 2)};\nconst DEFAULT_LANG = "${defaultLang}";\nfunction t(key) {`))
     .replace(/\{\{FOOTER\}\}/g, footerTemplate);
   
+  // 🔒 Security Scan
+  const scanner = new SecurityScanner();
+  const securityResult = scanner.scan(html);
+  
+  if (securityResult.vulnerabilities.length > 0) {
+    console.error("  🚨 SECURITY ALERT: Potential API keys or tokens detected!");
+    console.error("  The following sensitive patterns were found:\n");
+    for (const v of securityResult.vulnerabilities) {
+      console.error(`    ❌ ${v.severity.toUpperCase()}: ${v.type} at line ${v.line}`);
+      console.error(`       ${v.preview}\n`);
+    }
+    console.error("  ⚠️  Build blocked. Remove all secrets before deploying.\n");
+    process.exit(1);
+  } else {
+    console.log("  🔒 Security scan: CLEAN (no secrets detected)\n");
+  }
+  
   // Write files
   writeFileSync(join(outputDir, "index.html"), html);
   writeFileSync(join(outputDir, "_validate.json"), JSON.stringify(validation, null, 2));
+  writeFileSync(join(outputDir, "_security.json"), JSON.stringify(securityResult, null, 2));
   
   console.log(`  ✅ Generated landing page in ${outputDir}/`);
   console.log(`     • index.html — Landing page (${Math.round(html.length / 1024)}KB)`);
   console.log(`     • _validate.json — Compliance report (${validation.score}/100)`);
+  console.log(`     • _security.json — Security scan report`);
   console.log();
 }

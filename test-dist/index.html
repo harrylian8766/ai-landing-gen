@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Stock — AI Application</title>
+  <meta name="description" content="AI-powered stock analysis tool with real-time quotes and smart stock picking">
+  <meta property="og:title" content="AI Stock — AI Application">
+  <meta property="og:description" content="AI-powered stock analysis tool with real-time quotes and smart stock picking">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aistock.hk">
+  <meta property="og:image" content="https://aipair.ai/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@aipair_ai">
+  <link rel="canonical" href="https://aistock.hk">
+  <style>
+    :root {
+      --bg-primary: #0f0f23;
+      --bg-card: #1a1a2e;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0c0;
+      --text-muted: #607090;
+      --accent-primary: #667eea;
+      --accent-secondary: #764ba2;
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+    
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+      background-attachment: fixed;
+    }
+    
+    .logo {
+      font-size: 64px;
+      margin-bottom: 24px;
+    }
+    
+    h1 {
+      font-size: 56px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    
+    .lang-switch {
+      margin-bottom: 20px;
+    }
+    
+    .lang-switch button {
+      padding: 6px 16px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 20px;
+      color: #fff;
+      cursor: pointer;
+      margin: 0 4px;
+      transition: all 0.2s;
+    }
+    
+    .lang-switch button.active {
+      background: rgba(255,255,255,.25);
+      border-color: rgba(255,255,255,.4);
+    }
+    
+    .subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 650px;
+      margin-bottom: 48px;
+    }
+    
+    .cta {
+      padding: 16px 48px;
+      font-size: 18px;
+      font-weight: 600;
+      background: rgba(255,255,255,.15);
+      border: 2px solid rgba(255,255,255,.3);
+      border-radius: 50px;
+      color: #fff;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+    
+    .cta:hover {
+      background: rgba(255,255,255,.25);
+      transform: translateY(-2px);
+    }
+    
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 900px;
+      width: 100%;
+      padding: 0 16px;
+      margin-top: 64px;
+    }
+    
+    .feature {
+      background: var(--bg-card);
+      padding: 32px;
+      border-radius: 16px;
+      text-align: left;
+    }
+    
+    .feature-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+    }
+    
+    .feature h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .feature p {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+    
+    @media (max-width: 640px) {
+      .hero {
+        padding: 60px 16px 40px;
+        min-height: auto;
+      }
+      h1 { font-size: 36px; }
+      .logo { font-size: 36px; }
+      .subtitle { font-size: 16px; margin-bottom: 32px; }
+      .cta { padding: 14px 32px; font-size: 16px; }
+      .features {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        padding: 0 12px;
+      }
+      .feature { padding: 20px; }
+      .lang-switch button { padding: 5px 12px; font-size: 13px; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "AI Stock",
+    "url": "https://aistock.hk",
+    "description": "AI-powered stock analysis tool with real-time quotes and smart stock picking",
+    "applicationCategory": "WebApplication",
+    "operatingSystem": "Any"
+  }
+  </script>
+</head>
+<body>
+  <div class="hero">
+    <div class="logo">📈</div>
+    <h1>AI Stock</h1>
+    <div class="lang-switch">
+      <button id="btn-zh" class="active" onclick="setLang('zh')">简</button>
+      <button id="btn-zht" onclick="setLang('zh-Hant')">繁</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <p class="subtitle" data-i18n="subtitle">免费实时行情 + 智能选股</p>
+    <a href="https://aipair.ai" class="cta" data-i18n="cta">立即体验</a>
+    
+    <div class="features">
+      
+    <div class="feature">
+      <div class="feature-icon">📊</div>
+      <h3 data-i18n="feature_0_title">Real-time Quotes</h3>
+      <p data-i18n="feature_0_desc">View live stock prices and trends</p>
+    </div>
+  
+
+    <div class="feature">
+      <div class="feature-icon">🤖</div>
+      <h3 data-i18n="feature_1_title">AI Analysis</h3>
+      <p data-i18n="feature_1_desc">Smart stock picking with AI algorithms</p>
+    </div>
+  
+
+    <div class="feature">
+      <div class="feature-icon">💰</div>
+      <h3 data-i18n="feature_2_title">Fund Flow</h3>
+      <p data-i18n="feature_2_desc">Track main fund movements</p>
+    </div>
+  
+    </div>
+  </div>
+  
+  <script>
+    
+const I18N = {
+  "zh": {
+    "headline": "AI Stock",
+    "subtitle": "免费实时行情 + 智能选股",
+    "cta": "立即体验",
+    "feature_0_title": "Real-time Quotes",
+    "feature_0_desc": "View live stock prices and trends",
+    "feature_1_title": "AI Analysis",
+    "feature_1_desc": "Smart stock picking with AI algorithms",
+    "feature_2_title": "Fund Flow",
+    "feature_2_desc": "Track main fund movements"
+  },
+  "zh-Hant": {
+    "headline": "AI Stock",
+    "subtitle": "免費實時行情 + 智能選股",
+    "cta": "立即體驗",
+    "feature_0_title": "Real-time Quotes",
+    "feature_0_desc": "View live stock prices and trends",
+    "feature_1_title": "AI Analysis",
+    "feature_1_desc": "Smart stock picking with AI algorithms",
+    "feature_2_title": "Fund Flow",
+    "feature_2_desc": "Track main fund movements"
+  },
+  "en": {
+    "headline": "AI Stock",
+    "subtitle": "Free real-time quotes + AI stock picking",
+    "cta": "Try Now",
+    "feature_0_title": "Real-time Quotes",
+    "feature_0_desc": "View live stock prices and trends",
+    "feature_1_title": "AI Analysis",
+    "feature_1_desc": "Smart stock picking with AI algorithms",
+    "feature_2_title": "Fund Flow",
+    "feature_2_desc": "Track main fund movements"
+  }
+};
+const DEFAULT_LANG = "zh";
+function t(key) { {
+  "zh": {
+    "headline": "AI Stock",
+    "subtitle": "免费实时行情 + 智能选股",
+    "cta": "立即体验",
+    "feature_0_title": "实时行情",
+    "feature_0_desc": "查看股票实时价格和趋势",
+    "feature_1_title": "AI 分析",
+    "feature_1_desc": "智能选股策略与技术指标",
+    "feature_2_title": "资金流向",
+    "feature_2_desc": "追踪主力资金动向"
+  },
+  "zh-Hant": {
+    "headline": "AI Stock",
+    "subtitle": "免費實時行情 + 智能選股",
+    "cta": "立即體驗",
+    "feature_0_title": "實時行情",
+    "feature_0_desc": "查看股票實時價格和趨勢",
+    "feature_1_title": "AI 分析",
+    "feature_1_desc": "智能選股策略與技術指標",
+    "feature_2_title": "資金流向",
+    "feature_2_desc": "追蹤主力資金動向"
+  },
+  "en": {
+    "headline": "AI Stock",
+    "subtitle": "Free real-time quotes + AI stock picking",
+    "cta": "Try Now",
+    "feature_0_title": "Real-time Quotes",
+    "feature_0_desc": "View live stock prices and trends",
+    "feature_1_title": "AI Analysis",
+    "feature_1_desc": "Smart stock picking with AI",
+    "feature_2_title": "Fund Flow",
+    "feature_2_desc": "Track main fund movements"
+  }
+};
+const DEFAULT_LANG = "zh";
+
+function t(key) {
+  const lang = document.documentElement.lang || DEFAULT_LANG;
+  return I18N[lang]?.[key] || I18N[DEFAULT_LANG]?.[key] || key;
+}
+
+function setLang(lang) {
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    if (key && I18N[lang]?.[key]) {
+      el.textContent = I18N[lang][key];
+    }
+  });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+    const key = el.getAttribute("data-i18n-placeholder");
+    if (key && I18N[lang]?.[key]) {
+      el.placeholder = I18N[lang][key];
+    }
+  });
+  document.querySelectorAll(".lang-switch button").forEach(btn => {
+    btn.classList.remove("active");
+  });
+  const activeBtn = document.getElementById("btn-" + (lang === "zh-Hant" ? "zht" : lang));
+  if (activeBtn) activeBtn.classList.add("active");
+}
+
+  </script>
+  
+  <!-- AI Pair Cross-Link Footer -->
+<style>
+.aipair-footer-grid{max-width:900px;margin:48px auto 0;padding:32px 20px;border-top:1px solid rgba(255,255,255,.08)}
+.aipair-footer-grid h4{text-align:center;font-size:14px;color:#607090;margin-bottom:20px;font-weight:500}
+.aipair-footer-grid .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
+.aipair-footer-grid .grid a{display:block;padding:10px 12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;text-decoration:none;text-align:center;transition:all .2s;font-size:13px;color:#a0a0c0}
+.aipair-footer-grid .grid a:hover{background:rgba(102,126,234,.1);border-color:rgba(102,126,234,.3);color:#fff;transform:translateY(-2px)}
+.aipair-footer-grid .grid a .emoji{font-size:20px;display:block;margin-bottom:4px}
+.aipair-footer-grid .brand{text-align:center;margin-top:24px;padding-top:16px;border-top:1px solid rgba(255,255,255,.05)}
+.aipair-footer-grid .brand p{font-size:12px;color:#505070}
+.aipair-footer-grid .brand a{color:#667eea;text-decoration:none;font-weight:600}
+@media (max-width:640px){
+  .aipair-footer-grid{padding:20px 12px}
+  .aipair-footer-grid .grid{grid-template-columns:repeat(3,1fr);gap:8px}
+  .aipair-footer-grid .grid a{padding:8px;font-size:12px}
+  .aipair-footer-grid .grid a .emoji{font-size:16px}
+}
+</style>
+<div class="aipair-footer-grid">
+  <h4>🦞 更多 AI 应用</h4>
+  <div class="grid">
+    <a href="https://aistock.hk" target="_blank"><span class="emoji">📈</span>AI 股票</a>
+    <a href="https://aikit.hk" target="_blank"><span class="emoji">🛠️</span>AI 工具箱</a>
+    <a href="https://aicard.hk" target="_blank"><span class="emoji">💼</span>AI 名片</a>
+    <a href="https://aigame.hk" target="_blank"><span class="emoji">🎮</span>AI 游戏</a>
+    <a href="https://ailove.hk" target="_blank"><span class="emoji">💌</span>AI 恋爱</a>
+    <a href="https://aicity.hk" target="_blank"><span class="emoji">🏙️</span>AI 城市</a>
+    <a href="https://aifin.hk" target="_blank"><span class="emoji">💰</span>AI 理财</a>
+    <a href="https://aicom.hk" target="_blank"><span class="emoji">💬</span>AI 通讯</a>
+    <a href="https://aimodel.hk" target="_blank"><span class="emoji">🤖</span>AI 模型</a>
+    <a href="https://ainame.hk" target="_blank"><span class="emoji">✍️</span>AI 起名</a>
+    <a href="https://aicode.hk" target="_blank"><span class="emoji">💻</span>AI 编程</a>
+    <a href="https://aipair.ai" target="_blank"><span class="emoji">🚀</span>全部应用</a>
+  </div>
+  <div class="brand">
+    <p>Powered by <a href="https://aipair.ai" target="_blank">AI Pair</a> — 让 AI Agent 找到彼此<br>
+    <a href="https://github.com/ai-pair/ai-landing-gen" target="_blank">🚀 也创建一个</a></p>
+  </div>
+</div>
+</body>
+</html>

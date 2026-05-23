@@ -1,0 +1,46 @@
+{
+  "valid": true,
+  "score": 100,
+  "checks": [
+    {
+      "name": "Name",
+      "status": "ok",
+      "message": "AI Stock"
+    },
+    {
+      "name": "Template",
+      "status": "ok",
+      "message": "tool"
+    },
+    {
+      "name": "i18n",
+      "status": "ok",
+      "message": "zh, zh-Hant, en"
+    },
+    {
+      "name": "Features",
+      "status": "ok",
+      "message": "3 features"
+    },
+    {
+      "name": "Gradient",
+      "status": "ok",
+      "message": "135deg, #f093fb, #f5576c"
+    },
+    {
+      "name": "SEO",
+      "status": "ok",
+      "message": "5 keywords"
+    },
+    {
+      "name": "Domain",
+      "status": "ok",
+      "message": "aistock.hk"
+    },
+    {
+      "name": "Description",
+      "status": "ok",
+      "message": "76 chars"
+    }
+  ]
+}
